@@ -1,0 +1,38 @@
+.form-container{
+    border:2px solid black;
+    width:30%;
+    padding:10px;
+    text-align: center;
+}
+
+.form-group{
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.table-container{
+    width:100%;
+}
+
+#players-table{
+    margin-top:20px;
+    width: 100%;
+    border-collapse: collapse;
+    display: table;
+    text-align: center;
+}
+
+#players-table td, #players-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+#players-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#players-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #5d3bf5;
+    color: white;
+  }
