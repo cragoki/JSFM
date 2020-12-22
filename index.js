@@ -1,54 +1,9 @@
 
-//Variable names
-//1. Cannot be a reserved keyword
-//2. They should be meaningful
-//3. They cannot start with a number
-//4. They cannot contain a space or a hyphen(-)
-//5. They are case sensitive
-
-
-
-//Constants can never have their value changed.
-    //const interestRate = 0.3;
-
-    //interestRate = 1;
-
-    //console.log(interestRate);
-
-
-//Primitive Value Types
-    //let name = 'Craig';
-    //let age = 30;
-    //let isApproved = true;
-    //let firstName; //undefined
-    //let selectedColor = null;
-
-//Type Of
-    //let name = 'Craig';
-    //typeof name;
-
-//Reference Types
-    //Objects:
-
-    //let person = {
-        //name: 'Craig',
-        //age: 26
-    //};
-
-    //function birthday(){
-        //person.age = person.age + 1;
-    //}
-    //birthday();
-    //console.log(person);
-
-//Arrays
-    //let selectedColors = ['red', 'blue'];
-    //console.log(selectedColors[0]);
-
 //Global Player Array
 var playerList = [];
 
 //Table Management
+//This function will initialize the table, retrieving the local storage values previously set, and adding them to the table
 document.addEventListener('DOMContentLoaded', function() {
 
     var tbodyRef = document.getElementById('players-table').getElementsByTagName('tbody')[0];
@@ -58,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     for(let i = 0; i < playerList.length; i++){
     let player = playerList[i];
     
-    let playerId = document.createTextNode(player.playerId);
+    //Unsure why I needed to add .textContent extension here for PlayerId only.
+    let playerId = document.createTextNode(player.playerId).textContent;
     //FirstName
     let fName = document.createTextNode(player.firstName);
     //LastName
@@ -90,12 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var newCell = newRow.insertCell();
     newCell.appendChild(team);
     var newCell = newRow.insertCell();
-    newCell.innerHTML = '<input type="button" value="Edit" onclick="editPlayer(' + playerId.toString() +')"></input> <input type="button" value="Remove"></input>';
+
+    //Using template literals here to incorperate the playerid into the onclick function, more information: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+    newCell.innerHTML = `<input type="button" value="Edit" onclick='editPlayer("${playerId}")'></input> <input type="button" value="Remove" onclick='removePlayer("${playerId}")'></input>`;
     }
 }, false);
 
 
 //Button Listener:
+//This function will add a player to the users local storage array, based on the details submitted from the form.
 function addPlayer(){
 
     var initCount = playerList.length;
@@ -134,6 +93,7 @@ function addPlayer(){
 }
 
 //Add Player to local storage Array
+//This function will add the player object to the local storage array
 function addPlayerToLocalStorage (player){
 
     resetArray();
@@ -143,16 +103,25 @@ function addPlayerToLocalStorage (player){
     localStorage.setItem('playerList', JSON.stringify(playerList));
 }
 
+//This function is used when the page loads, its function is to check the users local storage for any existing player list, and if it exists,
+//override the local array with the storage array.
 function resetArray(){
     if(localStorage.getItem('playerList') != null){
         playerList =  JSON.parse(localStorage.getItem('playerList'));
     }
 }
 
+//This function is going to be used to calculate a players age, based off of their DOB
 function calculateAge(dob){
     return 0;
 }
 
-function removePlayer(playerId){}
+//This function will be used to remove a player from the users local storage array.
+function removePlayer(playerId){
+    console.log(playerId);
+}
 
-function editPlayer(playerId){}
+//This function will be used to edit a player from the users local storage array.
+function editPlayer(playerId){
+    console.log(playerId);
+}
