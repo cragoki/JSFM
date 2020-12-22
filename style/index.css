@@ -36,3 +36,24 @@
     background-color: #5d3bf5;
     color: white;
   }
+
+  #editPlayerBox{
+    width: 500px;
+    overflow: hidden;
+    background: rgba(25,25,25,0.9);
+    color:white;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+  }
+
+  .modal-btn{
+      margin-bottom: 10px;
+  }

@@ -68,7 +68,6 @@ function addPlayer(){
     var fName = document.getElementById('first-name').value;
     var lName = document.getElementById('last-name').value;
     var dob = document.getElementById('dob').value;
-    var dobConverted = new Date(dob);
     var nationality = document.getElementById('nationality').value;
     var pos = document.getElementById('position').value;
     var team = document.getElementById('team').value;
@@ -77,7 +76,7 @@ function addPlayer(){
         playerId: playerId,
         firstName: fName,
         lastName: lName,
-        dateOfBirth: dobConverted,
+        dateOfBirth: dob,
         country: nationality,
         position: pos,
         playerTeam: team
@@ -89,18 +88,17 @@ function addPlayer(){
         addPlayerToLocalStorage(player);
     }
 
-    location.reload();
+    submitChanges();
 }
 
 //Add Player to local storage Array
 //This function will add the player object to the local storage array
 function addPlayerToLocalStorage (player){
-
+    //Ensure we have the latest version of the array based on the Users local storage
     resetArray();
 
+    //Add the passed in player to the array.
     playerList.push(player);
-
-    localStorage.setItem('playerList', JSON.stringify(playerList));
 }
 
 //This function is used when the page loads, its function is to check the users local storage for any existing player list, and if it exists,
@@ -123,14 +121,54 @@ function removePlayer(playerId){
     playerList.splice(playerList.findIndex(x => x.playerId === playerId), 1);
 
     //Reset the localStorage array to the new list with the removed player.
+    submitChanges();
+}
+
+//This function will be used to launch the edit player pop up box, and assign its values based off of existing player information.
+function editPlayer(playerId){
+        //Display the popup box
+        let popUpBox = document.getElementById('editPlayerBox');
+        popUpBox.style.display = "block";
+
+        //Get the player object from the array based of the playerId
+        let player = playerList.find(x => x.playerId == playerId);
+
+        //Assign the inputs based on the players existing information
+        document.getElementById('edit-first-name').value = player.firstName;
+        document.getElementById('edit-last-name').value = player.lastName;
+        document.getElementById('edit-nationality').value = player.country;
+        document.getElementById('edit-position').value = player.position;
+        document.getElementById('edit-team').value = player.playerTeam;
+        document.getElementById('edit-dob').value = player.dateOfBirth;
+        
+        document.getElementById('saveChanges-btn').innerHTML = `<button class="modal-btn" onclick='editPlayerDetails("${playerId}")'>Save</button>`;
+        document.getElementById('closeModal-btn').innerHTML = '<button class="modal-btn" onclick="closePopUp()">Close</button>';
+    }
+
+function editPlayerDetails(playerId){
+    //get the array index for the player in order to change the values assigned to the player.
+    let arrayIndex = playerList.findIndex((x => x.playerId == playerId));
+
+    playerList[arrayIndex].firstName = document.getElementById('edit-first-name').value;
+    playerList[arrayIndex].lastName = document.getElementById('edit-last-name').value;
+    let dob = document.getElementById('edit-dob').value; 
+    playerList[arrayIndex].dateOfBirth = document.getElementById('edit-dob').value; 
+    playerList[arrayIndex].country = document.getElementById('edit-nationality').value;
+    playerList[arrayIndex].position = document.getElementById('edit-position').value;
+    playerList[arrayIndex].playerTeam = document.getElementById('edit-team').value;
+    
+    submitChanges();
+}
+
+function closePopUp(){
+    document.getElementById('editPlayerBox').style.display = "none";
+    document.getElementById('popUpOverlay').style.display = "none";
+    }
+
+function submitChanges(){
+    //Reset the local storage array
     localStorage.setItem('playerList', JSON.stringify(playerList));
 
     //Reload the page.
     location.reload();
-
-}
-
-//This function will be used to edit a player from the users local storage array.
-function editPlayer(playerId){
-    console.log(playerId);
-}
+    }

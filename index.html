@@ -8,10 +8,81 @@
     <link rel="stylesheet" href="style/index.css"/>
 </head>
 <body>
+    <div id="popUpOverlay"></div>
+    <div id="editPlayerBox">
+        <div id="box">
+            <div class="form-group">
+                <label>First Name: </label><input required type="text" id="edit-first-name"/>
+            </div>
+            <div class="form-group">
+                <label>Last Name: </label><input required type="text" id="edit-last-name"/>
+            </div>
+            <div class="form-group">
+                <label>DOB: </label><input required type="date" id="edit-dob"/>
+            </div>
+            <div class="form-group">
+                <label>Nationality: </label>
+                <select id="edit-nationality" required> 
+                    <option disabled selected value>select a nationality</option>
+                    <option>English</option>
+                    <option>Scottish</option>
+                    <option>Irish</option>
+                    <option>Welsh</option>
+                </select>
+
+                <label>Position: </label>
+                <select id="edit-position">
+                    <option disabled selected value>select a position</option>
+                    <option>GK</option>
+                    <option>RB</option>
+                    <option>RWB</option>
+                    <option>LB</option>
+                    <option>LWB</option>
+                    <option>CB</option>
+                    <option>CDM</option>
+                    <option>CAM</option>
+                    <option>RM</option>
+                    <option>RW</option>
+                    <option>LM</option>
+                    <option>LW</option>
+                    <option>CF</option>
+                    <option>ST</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Team: </label>
+                <select id="edit-team">
+                    <option selected>Free Agent</option>
+                    <option>Manchester United</option>
+                    <option>Arsenal</option>
+                    <option>Chelsea</option>
+                    <option>Rangers</option>
+                    <option>Celtic</option>
+                </select>
+            </div>
+          <div id="saveChanges-btn"></div>
+          <div id="closeModal-btn"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
         <div class="form-container">
             <h1>Create a Player</h1>
             <div class="form-group">
                 <label>First Name: </label><input required type="text" id="first-name"/>
+            </div>
+            <div class="form-group">
                 <label>Last Name: </label><input required type="text" id="last-name"/>
             </div>
             <div class="form-group">
