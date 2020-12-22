@@ -89,7 +89,7 @@ function addPlayer(){
         addPlayerToLocalStorage(player);
     }
 
-    //location.reload();
+    location.reload();
 }
 
 //Add Player to local storage Array
@@ -118,7 +118,16 @@ function calculateAge(dob){
 
 //This function will be used to remove a player from the users local storage array.
 function removePlayer(playerId){
-    console.log(playerId);
+    //Array.splice is used to remove an item from the array
+    //In this case we use the playerId value as it is a unique identifier, to remove the specified player from the array.
+    playerList.splice(playerList.findIndex(x => x.playerId === playerId), 1);
+
+    //Reset the localStorage array to the new list with the removed player.
+    localStorage.setItem('playerList', JSON.stringify(playerList));
+
+    //Reload the page.
+    location.reload();
+
 }
 
 //This function will be used to edit a player from the users local storage array.
