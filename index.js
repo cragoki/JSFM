@@ -79,26 +79,27 @@ function addPlayer(){
         dateOfBirth: dob,
         country: nationality,
         position: pos,
-        playerTeam: team
+        playerTeam: team,
+        addPlayer: function(){
+            //Add Player to local storage Array
+            //This function will add the player object to the local storage array
+
+            //Ensure we have the latest version of the array based on the Users local storage
+            resetArray();
+
+            //Add the passed in player to the array.
+            playerList.push(this);
+        }
+    
     }
 
     let currentCount = playerList.length;
     if(currentCount >= initCount)
     {
-        addPlayerToLocalStorage(player);
+        player.addPlayer();
     }
 
     submitChanges();
-}
-
-//Add Player to local storage Array
-//This function will add the player object to the local storage array
-function addPlayerToLocalStorage (player){
-    //Ensure we have the latest version of the array based on the Users local storage
-    resetArray();
-
-    //Add the passed in player to the array.
-    playerList.push(player);
 }
 
 //This function is used when the page loads, its function is to check the users local storage for any existing player list, and if it exists,
